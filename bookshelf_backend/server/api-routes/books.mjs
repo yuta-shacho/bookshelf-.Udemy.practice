@@ -1,4 +1,5 @@
 import express from "express";
+import { body, validationResult } from "express-validator";
 import Book from "../models/book.mjs";
 
 const router = express.Router();
@@ -21,12 +22,22 @@ router.delete("/:id", async (req, res) => {
   res.json({ msg: "Delete succeeded." });
 });
 
-router.post("/", async (req, res) => {
-  const body = req.body;
-  const book = new Book(req.body);
-  const newBook = await book.save();
-  res.json(newBook);
-});
+router.post(
+  "/",
+  body("title").notEmpty().withMessage("エラーメッセージ"),
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const errs = errors.array();
+      return res.status(400).json(errs);
+    }
+    const body = req.body;
+    const book = new Book(req.body);
+    const newBook = await book.save();
+    res.json(newBook);
+  }
+);
 
 router.patch("/:id", async (req, res) => {
   const { title, description, comment, rating } = req.body;
