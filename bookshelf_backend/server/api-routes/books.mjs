@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from "express-validator";
-
+import { requestErrorHandler } from "../helpers/helper.mjs";
 import {
   getAllBooks,
   getBookById,
@@ -12,11 +12,11 @@ import {
 const router = express.Router();
 
 // /api/books
-router.get("/", getAllBooks);
+router.get("/", requestErrorHandler(getAllBooks));
 
-router.get("/:id", getBookById);
+router.get("/:id", requestErrorHandler(getBookById));
 
-router.delete("/:id", deleteBook);
+router.delete("/:id", requestErrorHandler(deleteBook));
 
 router.post(
   "/",
@@ -24,7 +24,7 @@ router.post(
   body("description").notEmpty(),
   body("comment").notEmpty(),
   body("rating").notEmpty().isInt({ min: 1, max: 5 }),
-  registBook
+  requestErrorHandler(registBook)
 );
 
 //validator.js
@@ -34,7 +34,7 @@ router.patch(
   body("description").optional().notEmpty(),
   body("comment").optional().notEmpty(),
   body("rating").optional().notEmpty().isInt({ min: 1, max: 5 }),
-  updateBook
+  requestErrorHandler(updateBook)
 );
 
 export default router;

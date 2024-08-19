@@ -16,6 +16,15 @@ app.use(function (req, res) {
   res.status(404).json({ msg: "Page Not Found" });
 });
 
+//エラーハンドラー
+app.use(function (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  res.status(500).json({ msg: "不正なエラーが見つかりました。" });
+});
+
 app.listen(port, function () {
   console.log(`Sever Start: http://localhost:${port}`);
 });
