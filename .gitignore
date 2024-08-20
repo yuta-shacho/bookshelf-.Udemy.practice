@@ -1,0 +1,13 @@
+bookshelf_backend/node_modules/
+bookshelf_backend/package-lock.json
+bookshelf_backend/.env
+bookshelf_frontend/bookshelf_frontend/package-lock.json
+bookshelf_frontend/bookshelf_frontend/src/setupTests.js
+bookshelf_frontend/bookshelf_frontend/src/reportWebVitals.js
+bookshelf_frontend/bookshelf_frontend/src/logo.svg
+bookshelf_frontend/bookshelf_frontend/public/robots.txt
+bookshelf_frontend/bookshelf_frontend/public/logo512.png
+bookshelf_frontend/bookshelf_frontend/public/logo192.png
+bookshelf_frontend/bookshelf_frontend/public/favicon.ico
+bookshelf_frontend/bookshelf_frontend/README.md
+bookshelf_frontend/package-lock.json
